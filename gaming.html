@@ -5,22 +5,33 @@
     <title>Videojuegos | Mis Canales</title>
     <style>
         body { margin: 0; font-family: sans-serif; background-color: #0f0f13; color: white; }
-        header { background: #6c5ce7; padding: 20px; text-align: center; }
-        a { color: white; text-decoration: none; margin: 0 10px; font-weight: bold; }
-        main { padding: 20px; max-width: 800px; margin: 0 auto; text-align: center; }
+        header { background: linear-gradient(90deg, #6c5ce7, #a29bfe); padding: 30px; text-align: center; }
+        a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 1.1rem; }
+        main { padding: 40px 20px; max-width: 1000px; margin: 0 auto; }
+        .video-placeholder { background: #1a1a24; padding: 20px; margin-bottom: 20px; border-radius: 10px; border-left: 5px solid #6c5ce7; }
     </style>
 </head>
 <body>
     <header>
         <h1>🎮 Canal de Videojuegos</h1>
         <nav>
-            <a href="index.html"> Volver al Inicio</a>
+            <a href="index.html"> Inicio</a>
         </nav>
     </header>
+    
     <main>
-        <h2>Lista de Videos</h2>
-        <p>Aquí se mostrarán tus gameplays.</p>
-        <!-- Aquí pondremos los videos reales después -->
+        <h2>Últimos Videos</h2>
+        
+        <!-- Ejemplo de cómo se verá un video -->
+        <div class="video-placeholder">
+            <h3>🔴 Gameplay en Vivo (Ejemplo)</h3>
+            <p>Aquí se cargará el video de YouTube automáticamente cuando configuremos los RSS.</p>
+        </div>
+
+        <div class="video-placeholder">
+            <h3>🎮 Review del Juego X</h3>
+            <p>Descripción del video...</p>
+        </div>
     </main>
 </body>
 </html>
