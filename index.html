@@ -1,74 +1,152 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mis Canales | Julisa Muñoz</title>
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="stylesheet" href="css/gaming.css" id="channel-theme" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Canales | Julisa Muñoz</title>
+    <style>
+        /* ESTILOS GENERALES */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f0f13; /* Fondo oscuro elegante */
+            color: white;
+        }
+
+        /* ENCABEZADO CON FUSIÓN DE COLORES */
+        header {
+            background: linear-gradient(90deg, #6c5ce7 0%, #d63031 50%, #00b894 100%);
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        header h1 { margin: 0; font-size: 2.5rem; }
+        header p { margin: 10px 0 20px 0; font-size: 1.1rem; opacity: 0.9; }
+
+        /* MENÚ DE NAVEGACIÓN */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            background: rgba(0,0,0,0.3);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        nav a:hover { transform: scale(1.1); background: rgba(0,0,0,0.6); }
+
+        /* CONTENIDO PRINCIPAL */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* SECCIÓN DE CANALES (GRID) */
+        .grid-canales {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Esto hace que se pongan al lado */
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card-canal {
+            background: #1a1a24;
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid #333;
+        }
+
+        .card-canal h2 { margin-top: 0; border-bottom: 2px solid #444; padding-bottom: 10px; }
+        
+        /* COLORES ESPECÍFICOS PARA BORDES */
+        .gaming { border-top: 4px solid #6c5ce7; }
+        .suspense { border-top: 4px solid #d63031; }
+        .futbol { border-top: 4px solid #00b894; }
+
+        .btn-ver-mas {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background: #333;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        /* ERROR MESSAGE FIX */
+        .error-msg { color: #ff7675; font-size: 0.9rem; }
+
+        /* PIE DE PÁGINA */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #000;
+            margin-top: 40px;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
-  <header class="main-header">
-    <h1>🎮 🎬 ⚽ Mis Canales</h1>
-    <p class="bio">Hola, soy Julisa. Creadora de contenido en 3 mundos: videojuegos, historias de suspenso y fútbol. ¡Bienvenido a mi espacio!</p>
-    <nav>
-      <a href="gaming.html">🎮 Videojuegos</a>
-      <a href="suspense.html">🎬 Suspenso</a>
-      <a href="futbol.html">⚽ Fútbol</a>
-      <a href="comunidad.html">💬 Comunidad</a>
-    </nav>
-  </header>
 
-  <main>
-    <!-- Sección: Últimos videos -->
-    <section class="videos-grid" id="latest-videos">
-      <h2>🔥 Últimos videos</h2>
-      <div class="channel-column" data-channel="gaming">
-        <h3>🎮 Videojuegos</h3>
-        <div class="video-list" id="gaming-feed"></div>
-      </div>
-      <div class="channel-column" data-channel="suspense">
-        <h3>🎬 Suspenso</h3>
-        <div class="video-list" id="suspense-feed"></div>
-      </div>
-      <div class="channel-column" data-channel="futbol">
-        <h3>⚽ Fútbol</h3>
-        <div class="video-list" id="futbol-feed"></div>
-      </div>
-    </section>
+    <header>
+        <h1> 🎬 ⚽ Mis Canales</h1>
+        <p>Hola, soy Julisa. Bienvenidos a mi espacio oficial.</p>
+        
+        <nav>
+            <a href="index.html" style="background: white; color: black;">🏠 Inicio</a>
+            <a href="gaming.html"> Videojuegos</a>
+            <a href="suspense.html">🎬 Suspenso</a>
+            <a href="futbol.html">⚽ Fútbol</a>
+            <a href="comunidad.html">💬 Comunidad</a>
+        </nav>
+    </header>
 
-    <!-- Sección: Shorts -->
-    <section class="shorts-grid" id="latest-shorts">
-      <h2>🎬 Shorts destacados</h2>
-      <div class="shorts-container" id="shorts-feed"></div>
-    </section>
+    <main>
+        <h2 style="text-align: center;">🔥 Últimos Videos</h2>
+        
+        <div class="grid-canales">
+            <!-- Canal Videojuegos -->
+            <div class="card-canal gaming">
+                <h2>🎮 Videojuegos</h2>
+                <p class="error-msg">⚠️ Cargando videos...</p>
+                <a href="gaming.html" class="btn-ver-mas">Ver todo el canal →</a>
+            </div>
 
-    <!-- Botón EN VIVO (manual) -->
-    <section class="live-notice" id="live-banner" style="display:none;">
-      <span class="live-badge">🔴 EN VIVO AHORA</span>
-      <a href="https://youtube.com/@tucanal" target="_blank" class="live-link">Ver transmisión →</a>
-    </section>
-  </main>
+            <!-- Canal Suspenso -->
+            <div class="card-canal suspense">
+                <h2>🎬 Suspenso</h2>
+                <p class="error-msg">⚠️ Cargando videos...</p>
+                <a href="suspense.html" class="btn-ver-mas">Ver todo el canal →</a>
+            </div>
 
-  <footer>
-    <p>© 2026 Julisa Muñoz | Hecho con ❤️ en Venezuela</p>
-  </footer>
+            <!-- Canal Fútbol -->
+            <div class="card-canal futbol">
+                <h2>⚽ Fútbol</h2>
+                <p class="error-msg">⚠️ Cargando videos...</p>
+                <a href="futbol.html" class="btn-ver-mas">Ver todo el canal →</a>
+            </div>
+        </div>
 
-  <script src="js/youtube-rss.js"></script>
-  <script>
-    // Configuración: Reemplaza con tus Channel IDs
-    const CHANNELS = {
-      gaming: 'UCXXXXXXXXXXXXXXXXXXXXXXX',
-      suspense: 'UCYYYYYYYYYYYYYYYYYYYYYYY',
-      futbol: 'UCZZZZZZZZZZZZZZZZZZZZZZZ'
-    };
-    // Cargar feeds al iniciar
-    document.addEventListener('DOMContentLoaded', () => {
-      loadYouTubeFeed(CHANNELS.gaming, 'gaming-feed', 6);
-      loadYouTubeFeed(CHANNELS.suspense, 'suspense-feed', 6);
-      loadYouTubeFeed(CHANNELS.futbol, 'futbol-feed', 6);
-      loadShortsFeed(CHANNELS, 'shorts-feed', 3);
-    });
-  </script>
+        <h2 style="text-align: center; margin-top: 40px;">📺 Shorts Destacados</h2>
+        <div class="card-canal" style="text-align: center; padding: 40px;">
+            <p>Aquí aparecerán tus mejores Shorts próximamente.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 Julisa Muñoz | Hecho con ❤️ en Venezuela</p>
+    </footer>
+
 </body>
 </html>
