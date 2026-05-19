@@ -5,135 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Canales | Julisa Muñoz</title>
     <style>
-        /* ESTILOS GENERALES */
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0f0f13; /* Fondo oscuro elegante */
-            color: white;
-        }
-
-        /* ENCABEZADO CON FUSIÓN DE COLORES */
-        header {
-            background: linear-gradient(90deg, #6c5ce7 0%, #d63031 50%, #00b894 100%);
-            padding: 2rem 1rem;
-            text-align: center;
-        }
-
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f0f13; color: white; }
+        header { background: linear-gradient(90deg, #6c5ce7 0%, #d63031 50%, #00b894 100%); padding: 2rem 1rem; text-align: center; }
         header h1 { margin: 0; font-size: 2.5rem; }
         header p { margin: 10px 0 20px 0; font-size: 1.1rem; opacity: 0.9; }
-
-        /* MENÚ DE NAVEGACIÓN */
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            background: rgba(0,0,0,0.3);
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: transform 0.2s;
-        }
-
+        nav { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        nav a { background: rgba(0,0,0,0.3); color: white; padding: 10px 20px; text-decoration: none; border-radius: 25px; font-weight: bold; transition: transform 0.2s; }
         nav a:hover { transform: scale(1.1); background: rgba(0,0,0,0.6); }
-
-        /* CONTENIDO PRINCIPAL */
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        /* SECCIÓN DE CANALES (GRID) */
-        .grid-canales {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Esto hace que se pongan al lado */
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .card-canal {
-            background: #1a1a24;
-            border-radius: 15px;
-            padding: 20px;
-            border: 1px solid #333;
-        }
-
+        main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .grid-canales { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
+        .card-canal { background: #1a1a24; border-radius: 15px; padding: 20px; border: 1px solid #333; }
         .card-canal h2 { margin-top: 0; border-bottom: 2px solid #444; padding-bottom: 10px; }
-        
-        /* COLORES ESPECÍFICOS PARA BORDES */
         .gaming { border-top: 4px solid #6c5ce7; }
         .suspense { border-top: 4px solid #d63031; }
         .futbol { border-top: 4px solid #00b894; }
-
-        .btn-ver-mas {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin-top: 15px;
-            background: #333;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 8px;
-        }
-
-        /* ERROR MESSAGE FIX */
-        .error-msg { color: #ff7675; font-size: 0.9rem; }
-
-        /* PIE DE PÁGINA */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #000;
-            margin-top: 40px;
-            color: #666;
-        }
+        .btn-ver-mas { display: block; width: 100%; padding: 10px; margin-top: 15px; background: #333; color: white; text-align: center; text-decoration: none; border-radius: 8px; }
+        .video-list { list-style: none; padding: 0; }
+        .video-item { margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #333; }
+        .video-item a { color: #fff; text-decoration: none; font-weight: 500; }
+        .video-item span { display: block; font-size: 0.8rem; color: #aaa; margin-top: 5px; }
+        footer { text-align: center; padding: 20px; background: #000; margin-top: 40px; color: #666; }
     </style>
 </head>
 <body>
-
     <header>
-        <h1> 🎬 ⚽ Mis Canales</h1>
+        <h1>🎬 ⚽ Mis Canales</h1>
         <p>Hola, soy Julisa. Bienvenidos a mi espacio oficial.</p>
-        
         <nav>
             <a href="index.html" style="background: white; color: black;">🏠 Inicio</a>
-            <a href="gaming.html"> Videojuegos</a>
+            <a href="gaming.html">🎮 Videojuegos</a>
             <a href="suspense.html">🎬 Suspenso</a>
-            <a href="futbol.html">⚽ Fútbol</a>
+            <a href="futbol.html"> Fútbol</a>
             <a href="comunidad.html">💬 Comunidad</a>
         </nav>
     </header>
 
     <main>
         <h2 style="text-align: center;">🔥 Últimos Videos</h2>
-        
         <div class="grid-canales">
-            <!-- Canal Videojuegos -->
+            <!-- Videojuegos -->
             <div class="card-canal gaming">
                 <h2>🎮 Videojuegos</h2>
-                <p class="error-msg">⚠️ Cargando videos...</p>
+                <ul class="video-list" id="feed-gaming"></ul>
                 <a href="gaming.html" class="btn-ver-mas">Ver todo el canal →</a>
             </div>
-
-            <!-- Canal Suspenso -->
+            <!-- Suspenso -->
             <div class="card-canal suspense">
                 <h2>🎬 Suspenso</h2>
-                <p class="error-msg">⚠️ Cargando videos...</p>
+                <ul class="video-list" id="feed-suspense"></ul>
                 <a href="suspense.html" class="btn-ver-mas">Ver todo el canal →</a>
             </div>
-
-            <!-- Canal Fútbol -->
+            <!-- Fútbol -->
             <div class="card-canal futbol">
                 <h2>⚽ Fútbol</h2>
-                <p class="error-msg">⚠️ Cargando videos...</p>
+                <ul class="video-list" id="feed-futbol"></ul>
                 <a href="futbol.html" class="btn-ver-mas">Ver todo el canal →</a>
             </div>
         </div>
@@ -148,5 +73,39 @@
         <p>© 2026 Julisa Muñoz | Hecho con ❤️ en Venezuela</p>
     </footer>
 
+    <script>
+        // --- CONFIGURACIÓN: CAMBIA LOS IDs POR LOS TUYOS ---
+        const CHANNEL_IDS = {
+            gaming: 'UCxxxxxxxxxxxxxx', // Pega aquí el ID del canal de juegos
+            suspense: 'UCxxxxxxxxxxxxxx', // Pega aquí el ID del canal de suspenso
+            futbol: 'UCxxxxxxxxxxxxxx' // Pega aquí el ID del canal de fútbol
+        };
+
+        async function loadVideos(channelKey, listId) {
+            const url = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_IDS[channelKey]}`;
+            const api = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
+            
+            try {
+                const res = await fetch(api);
+                const data = await res.json();
+                const list = document.getElementById(listId);
+                
+                data.items.slice(0, 3).forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = 'video-item';
+                    li.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a><span>${new Date(item.pubDate).toLocaleDateString()}</span>`;
+                    list.appendChild(li);
+                });
+            } catch(e) {
+                document.getElementById(listId).innerHTML = "<li>Error cargando videos</li>";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadVideos('gaming', 'feed-gaming');
+            loadVideos('suspense', 'feed-suspense');
+            loadVideos('futbol', 'feed-futbol');
+        });
+    </script>
 </body>
 </html>
