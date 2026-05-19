@@ -22,9 +22,12 @@
         .btn-ver-mas { display: block; width: 100%; padding: 10px; margin-top: 15px; background: #333; color: white; text-align: center; text-decoration: none; border-radius: 8px; }
         .video-list { list-style: none; padding: 0; }
         .video-item { margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #333; }
-        .video-item a { color: #fff; text-decoration: none; font-weight: 500; }
+        .video-item a { color: #fff; text-decoration: none; font-weight: 500; display: block; }
+        .video-item a:hover { color: #6c5ce7; }
         .video-item span { display: block; font-size: 0.8rem; color: #aaa; margin-top: 5px; }
+        .loading { color: #aaa; font-style: italic; }
         footer { text-align: center; padding: 20px; background: #000; margin-top: 40px; color: #666; }
+        @media (max-width: 768px) { header h1 { font-size: 1.8rem; } nav { flex-direction: column; align-items: center; } }
     </style>
 </head>
 <body>
@@ -43,26 +46,22 @@
     <main>
         <h2 style="text-align: center;">🔥 Últimos Videos</h2>
         <div class="grid-canales">
-            <!-- Videojuegos -->
             <div class="card-canal gaming">
                 <h2>🎮 Videojuegos</h2>
-                <ul class="video-list" id="feed-gaming"></ul>
+                <ul class="video-list" id="feed-gaming"><li class="loading">Cargando...</li></ul>
                 <a href="gaming.html" class="btn-ver-mas">Ver todo el canal →</a>
             </div>
-            <!-- Suspenso -->
             <div class="card-canal suspense">
                 <h2>🎬 Suspenso</h2>
-                <ul class="video-list" id="feed-suspense"></ul>
+                <ul class="video-list" id="feed-suspense"><li class="loading">Cargando...</li></ul>
                 <a href="suspense.html" class="btn-ver-mas">Ver todo el canal →</a>
             </div>
-            <!-- Fútbol -->
             <div class="card-canal futbol">
-                <h2>⚽ Fútbol</h2>
-                <ul class="video-list" id="feed-futbol"></ul>
+                <h2> Fútbol</h2>
+                <ul class="video-list" id="feed-futbol"><li class="loading">Cargando...</li></ul>
                 <a href="futbol.html" class="btn-ver-mas">Ver todo el canal →</a>
             </div>
         </div>
-
         <h2 style="text-align: center; margin-top: 40px;">📺 Shorts Destacados</h2>
         <div class="card-canal" style="text-align: center; padding: 40px;">
             <p>Aquí aparecerán tus mejores Shorts próximamente.</p>
@@ -74,33 +73,35 @@
     </footer>
 
     <script>
-        // --- CONFIGURACIÓN: CAMBIA LOS IDs POR LOS TUYOS ---
+        // ⚠️ CAMBIA ESTOS IDs POR LOS TUYOS (busca "channelId" en el código fuente de YouTube)
         const CHANNEL_IDS = {
-            gaming: 'UCxxxxxxxxxxxxxx', // Pega aquí el ID del canal de juegos
-            suspense: 'UCxxxxxxxxxxxxxx', // Pega aquí el ID del canal de suspenso
-            futbol: 'UCxxxxxxxxxxxxxx' // Pega aquí el ID del canal de fútbol
+            gaming: 'UCxxxxxxxxxxxxxxxxxxxxxxx',  // @Jullverse
+            suspense: 'UCxxxxxxxxxxxxxxxxxxxxxxx', // @BitdeSuspenso
+            futbol: 'UCxxxxxxxxxxxxxxxxxxxxxxx'    // @VinotintoGalactico
         };
 
         async function loadVideos(channelKey, listId) {
             const url = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_IDS[channelKey]}`;
             const api = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
-            
             try {
                 const res = await fetch(api);
                 const data = await res.json();
                 const list = document.getElementById(listId);
-                
-                data.items.slice(0, 3).forEach(item => {
-                    const li = document.createElement('li');
-                    li.className = 'video-item';
-                    li.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a><span>${new Date(item.pubDate).toLocaleDateString()}</span>`;
-                    list.appendChild(li);
-                });
+                if (data.status === 'ok' && data.items.length > 0) {
+                    list.innerHTML = '';
+                    data.items.slice(0, 3).forEach(item => {
+                        const li = document.createElement('li');
+                        li.className = 'video-item';
+                        li.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a><span>${new Date(item.pubDate).toLocaleDateString('es-VE')}</span>`;
+                        list.appendChild(li);
+                    });
+                } else {
+                    list.innerHTML = '<li class="loading">Sin videos recientes</li>';
+                }
             } catch(e) {
-                document.getElementById(listId).innerHTML = "<li>Error cargando videos</li>";
+                document.getElementById(listId).innerHTML = "<li class='loading'>Error al cargar</li>";
             }
         }
-
         document.addEventListener('DOMContentLoaded', () => {
             loadVideos('gaming', 'feed-gaming');
             loadVideos('suspense', 'feed-suspense');
