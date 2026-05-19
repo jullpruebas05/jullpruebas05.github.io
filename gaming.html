@@ -5,37 +5,43 @@
     <title>Videojuegos | Mis Canales</title>
     <style>
         body { margin: 0; font-family: sans-serif; background-color: #0f0f13; color: white; }
-        header { background: #6c5ce7; padding: 30px; text-align: center; }
+        header { background: linear-gradient(90deg, #6c5ce7, #a29bfe); padding: 30px; text-align: center; }
         nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 1.1rem; }
         main { padding: 40px 20px; max-width: 1000px; margin: 0 auto; }
-        .video-placeholder { background: #1a1a24; padding: 20px; margin-bottom: 20px; border-radius: 10px; border-left: 5px solid #6c5ce7; }
+        .video-card { background: #1a1a24; padding: 20px; margin-bottom: 20px; border-radius: 10px; border-left: 5px solid #6c5ce7; }
+        .video-card a { color: white; text-decoration: none; font-weight: 500; }
+        .video-card a:hover { color: #a29bfe; }
+        .date { font-size: 0.85rem; color: #aaa; margin-top: 8px; display: block; }
     </style>
 </head>
 <body>
     <header>
         <h1>🎮 Canal de Videojuegos</h1>
-        <nav>
-            <a href="index.html">🏠 Inicio</a>
-        </nav>
+        <nav><a href="index.html">🏠 Inicio</a></nav>
     </header>
     <main>
         <h2>Últimos Videos</h2>
-        <ul class="video-list" id="feed-gaming-full"></ul>
+        <ul id="feed-gaming-full"></ul>
     </main>
     <script>
-        const CHANNEL_ID = 'UCxxxxxxxxxxxxxx'; // CAMBIA ESTO POR TU ID DE VIDEOJUEGOS
+        // ⚠️ CAMBIA ESTE ID POR EL DE @Jullverse
+        const CHANNEL_ID = 'UCxxxxxxxxxxxxxxxxxxxxxxx';
         async function load() {
             const url = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
             const api = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
-            const res = await fetch(api);
-            const data = await res.json();
-            const list = document.getElementById('feed-gaming-full');
-            data.items.forEach(item => {
-                const li = document.createElement('li');
-                li.className = 'video-placeholder';
-                li.innerHTML = `<h3><a href="${item.link}" style="color:white">${item.title}</a></h3><p>${new Date(item.pubDate).toLocaleDateString()}</p>`;
-                list.appendChild(li);
-            });
+            try {
+                const res = await fetch(api);
+                const data = await res.json();
+                const list = document.getElementById('feed-gaming-full');
+                if (data.status === 'ok') {
+                    data.items.forEach(item => {
+                        const li = document.createElement('li');
+                        li.className = 'video-card';
+                        li.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a><span class="date">${new Date(item.pubDate).toLocaleDateString('es-VE')}</span>`;
+                        list.appendChild(li);
+                    });
+                }
+            } catch(e) { console.error(e); }
         }
         load();
     </script>
