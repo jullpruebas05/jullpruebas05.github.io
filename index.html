@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mis Canales | Julisa Muñoz</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/gaming.css" id="channel-theme" />
+</head>
+<body>
+  <header class="main-header">
+    <h1>🎮 🎬 ⚽ Mis Canales</h1>
+    <p class="bio">Hola, soy Julisa. Creadora de contenido en 3 mundos: videojuegos, historias de suspenso y fútbol. ¡Bienvenido a mi espacio!</p>
+    <nav>
+      <a href="gaming.html">🎮 Videojuegos</a>
+      <a href="suspense.html">🎬 Suspenso</a>
+      <a href="futbol.html">⚽ Fútbol</a>
+      <a href="comunidad.html">💬 Comunidad</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Sección: Últimos videos -->
+    <section class="videos-grid" id="latest-videos">
+      <h2>🔥 Últimos videos</h2>
+      <div class="channel-column" data-channel="gaming">
+        <h3>🎮 Videojuegos</h3>
+        <div class="video-list" id="gaming-feed"></div>
+      </div>
+      <div class="channel-column" data-channel="suspense">
+        <h3>🎬 Suspenso</h3>
+        <div class="video-list" id="suspense-feed"></div>
+      </div>
+      <div class="channel-column" data-channel="futbol">
+        <h3>⚽ Fútbol</h3>
+        <div class="video-list" id="futbol-feed"></div>
+      </div>
+    </section>
+
+    <!-- Sección: Shorts -->
+    <section class="shorts-grid" id="latest-shorts">
+      <h2>🎬 Shorts destacados</h2>
+      <div class="shorts-container" id="shorts-feed"></div>
+    </section>
+
+    <!-- Botón EN VIVO (manual) -->
+    <section class="live-notice" id="live-banner" style="display:none;">
+      <span class="live-badge">🔴 EN VIVO AHORA</span>
+      <a href="https://youtube.com/@tucanal" target="_blank" class="live-link">Ver transmisión →</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Julisa Muñoz | Hecho con ❤️ en Venezuela</p>
+  </footer>
+
+  <script src="js/youtube-rss.js"></script>
+  <script>
+    // Configuración: Reemplaza con tus Channel IDs
+    const CHANNELS = {
+      gaming: 'UCXXXXXXXXXXXXXXXXXXXXXXX',
+      suspense: 'UCYYYYYYYYYYYYYYYYYYYYYYY',
+      futbol: 'UCZZZZZZZZZZZZZZZZZZZZZZZ'
+    };
+    // Cargar feeds al iniciar
+    document.addEventListener('DOMContentLoaded', () => {
+      loadYouTubeFeed(CHANNELS.gaming, 'gaming-feed', 6);
+      loadYouTubeFeed(CHANNELS.suspense, 'suspense-feed', 6);
+      loadYouTubeFeed(CHANNELS.futbol, 'futbol-feed', 6);
+      loadShortsFeed(CHANNELS, 'shorts-feed', 3);
+    });
+  </script>
+</body>
+</html>
